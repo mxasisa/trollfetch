@@ -1,0 +1,32 @@
+sudo tee /usr/local/bin/trollfetch > /dev/null <<'EOF'
+#!/bin/bash
+
+cat <<'LOGO'
+⠀⠀⠀⠀⠀⠀⣀⡴⠖⠒⠒⢒⣒⡖⠒⠒⠒⠒⠒⠒⠶⠶⠤⣤⣀⣀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣴⠋⠀⠀⠤⣪⣝⡲⠯⠭⠥⠀⠀⠀⠀⠀⣀⣐⣒⡒⠉⠙⢦⡀⠀⠀
+⠀⠀⠀⣼⠃⠀⠈⠰⠫⠋⣀⣀⣀⣀⠀⠃⠀⠀⠀⠸⠀⠀⠀⠈⠆⠀⠀⢧⠀⠀
+⠀⣠⡾⠁⠀⡀⠠⠄⢰⣿⠿⠿⢯⣍⣙⣶⠀⠀⢀⣠⣶⣾⣿⠶⠆⠤⠤⢜⢷⡄
+⡾⢻⢡⡞⠋⣽⠛⠲⠤⡤⠴⠋⠀⠀⠉⠁⠀⠀⠈⣿⠁⠀⢀⣀⣠⠶⠶⣽⣵⣿
+⣇⢠⢸⡥⠶⣟⠛⠶⣤⣀⠀⠀⠀⢲⡖⣂⣀⠀⠀⠈⢳⣦⡀⠉⠉⣽⡄⠰⣻⣿
+⠙⣮⡪⠁⠀⠻⣶⣄⣸⣍⠙⠓⠶⣤⣥⣉⣉⠀⠠⠴⠋⠁⣈⣥⣴⣿⡇⠈⣽⠃
+⠀⠈⢻⡄⠀⠀⠙⣆⢹⡟⠷⣶⣤⣇⣀⠉⠙⡏⠉⢻⡟⢉⣹⣅⣼⣿⡇⠀⡏⠀
+⠀⠀⠀⠻⣄⠀⠀⠈⠻⢦⡀⠀⣽⠉⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⡇⠀
+⠀⠀⠀⠀⠙⢦⣀⠄⡀⢄⡙⠻⠧⣤⣀⣀⣿⠀⠀⣿⢀⣼⣃⣾⣼⠟⠁⠀⡇⠀
+⠀⠀⠀⠀⠀⠀⠉⠓⢮⣅⡚⠵⣒⡤⢄⡉⠉⠉⠉⠉⠉⠉⠉⢀⡠⠀⠀⠀⣷⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠳⢦⣄⡉⠙⠛⠃⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⡿⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠲⠶⢤⣤⣀⣀⣀⣀⣀⣀⡤⠞⠁⠀
+LOGO
+
+printf '\n'
+printf '╭─ TROLLFETCH ─────────────────────╮\n'
+printf '│ OS       : %s\n' "$(grep PRETTY_NAME /etc/os-release | cut -d= -f2- | tr -d '"')"
+printf '│ Kernel   : %s\n' "$(uname -r)"
+printf '│ Host     : %s\n' "$(hostname)"
+printf '│ Shell    : %s\n' "$SHELL"
+printf '│ CPU      : %s\n' "$(lscpu | grep 'Model name' | cut -d: -f2- | xargs)"
+printf '│ Memory   : %s\n' "$(free -h | awk '/Mem:/ {print $3 " / " $2}')"
+printf '│ Uptime   : %s\n' "$(uptime -p)"
+printf '╰──────────────────────────────────╯\n'
+EOF
+
+sudo chmod +x /usr/local/bin/trollfetch 
